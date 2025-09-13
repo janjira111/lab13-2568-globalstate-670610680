@@ -8,6 +8,7 @@ import {
   Group,
   Checkbox,
   ActionIcon,
+  Badge,
 } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { useState } from "react";
@@ -17,6 +18,7 @@ import { useTaskStore } from "../store/TaskItemStore";
 export default function HomePage() {
   const { tasks, addTask, toggleTask, removeTask } = useTaskStore();
   const [modalOpened, setModalOpened] = useState(false);
+  
 
   return (
     <Container size="lg" py="lg">
@@ -41,6 +43,12 @@ export default function HomePage() {
               <Group justify="space-between" align="flex-start">
                 <Stack>
                   {/* เพิ่ม assignees ตรงนี้*/}
+                  {(task.assignees).map((name: string) => (
+                    <Badge key={name} variant="light" color="blue">
+                      {name}
+                    </Badge>
+                  ))}
+
                   <Text
                     fw={600}
                     td={task.isDone ? "line-through" : "none"}
